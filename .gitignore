@@ -10,3 +10,4 @@ coverage
 ormconfig.json
 dist/
 *.log
+.dccache

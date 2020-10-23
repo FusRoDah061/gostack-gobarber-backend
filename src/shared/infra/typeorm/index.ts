@@ -33,15 +33,28 @@ if (process.env.DATABASE_URL) {
   };
 }
 
-const mongoConnection: ConnectionOptions = {
+let mongoConnection: ConnectionOptions = {
   name: 'mongo',
   type: 'mongodb',
-  url: `mongodb+srv://${process.env.MONGO_DATABASE_USER}:${process.env.MONGO_DATABASE_PASSWORD}@${process.env.MONGO_DATABASE_HOST}/${process.env.MONGO_DATABASE_NAME}`,
   useUnifiedTopology: true,
   entities: [
     `./${rootDir}/modules/**/infra/typeorm/schemas/*.${fileExtension}`,
   ],
 };
+
+if (process.env.MONGO_URL) {
+  mongoConnection = {
+    ...mongoConnection,
+    url: process.env.MONGO_URL,
+  };
+} else {
+  mongoConnection = {
+    ...mongoConnection,
+    host: process.env.MONGO_DATABASE_HOST,
+    port: Number(process.env.MONGO_DATABASE_PORT || 27017),
+    database: process.env.MONGO_DATABASE_NAME,
+  };
+}
 
 // Caso não seja informado parêmtro, irá busca pelo ormconfig.json
 createConnections([postgresConnection, mongoConnection]);
