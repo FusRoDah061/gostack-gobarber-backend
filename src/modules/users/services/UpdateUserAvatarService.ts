@@ -28,7 +28,7 @@ export default class UpdateUserAvatarService {
       throw new AppError('Only authenticated users can change avatar.', 401);
     }
 
-    if (user.avatar) {
+    if (user.avatar && user.avatar !== 'default_avatar.jpg') {
       // Remover avatar antigo
       await this.storageProvider.deleteFile(user.avatar);
     }

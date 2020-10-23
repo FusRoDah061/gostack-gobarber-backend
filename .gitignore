@@ -4,7 +4,8 @@ node_modules/
 build/
 temp/
 tmp/*
-!tmp/.gitkeep
+!tmp/uploads/.gitkeep
+!tmp/uploads/default_avatar.jpg
 .env
 coverage
 ormconfig.json

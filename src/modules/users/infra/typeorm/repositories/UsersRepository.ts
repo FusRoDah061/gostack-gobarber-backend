@@ -47,17 +47,19 @@ export default class UsersRepository implements IUsersRepository {
     name,
     email,
     password,
+    avatar,
   }: ICreateUserDTO): Promise<User> {
-    const appointment = this.ormRepository.create({
+    const user = this.ormRepository.create({
       name,
       email,
       password,
+      avatar,
     });
 
     // Persiste a entidade
-    await this.ormRepository.save(appointment);
+    await this.ormRepository.save(user);
 
-    return appointment;
+    return user;
   }
 
   public async save(user: User): Promise<User> {

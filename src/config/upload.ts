@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import multer, { StorageEngine } from 'multer';
@@ -13,7 +14,7 @@ interface IUploadConfig {
   };
 
   config: {
-    disk: {};
+    disk: Record<string, unknown>;
     aws: {
       bucket: string;
     };
@@ -21,12 +22,21 @@ interface IUploadConfig {
 }
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
+const uploadsFolder = path.resolve(tmpFolder, 'uploads');
+
+if (!fs.existsSync(tmpFolder)) {
+  fs.mkdirSync(tmpFolder);
+}
+
+if (!fs.existsSync(uploadsFolder)) {
+  fs.mkdirSync(uploadsFolder);
+}
 
 export default {
   driver: process.env.STORAGE_DRIVER,
 
   tmpFolder,
-  uploadsFolder: path.resolve(tmpFolder, 'uploads'),
+  uploadsFolder,
 
   multer: {
     storage: multer.diskStorage({
