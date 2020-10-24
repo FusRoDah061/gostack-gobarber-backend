@@ -37,7 +37,6 @@ export default class CreateUserService {
       name,
       email,
       password: passwordHash,
-      avatar: 'default_avatar.jpg',
     });
 
     await this.cacheProvider.invalidatePrefixed('providers-list');

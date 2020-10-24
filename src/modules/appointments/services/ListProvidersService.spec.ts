@@ -22,21 +22,18 @@ describe('ShowProfile', () => {
       name: 'Teste',
       email: 'teste@email.com',
       password: '123456',
-      avatar: 'avatar.jpg',
     });
 
     const user2 = await fakeUsersRespository.create({
       name: 'Teste Jr',
       email: 'testejr@email.com',
       password: '123456',
-      avatar: 'avatar.jpg',
     });
 
     const loggedUser = await fakeUsersRespository.create({
       name: 'Teste Logado',
       email: 'testelogado@email.com',
       password: '123456',
-      avatar: 'avatar.jpg',
     });
 
     const providers = await listProviders.execute({

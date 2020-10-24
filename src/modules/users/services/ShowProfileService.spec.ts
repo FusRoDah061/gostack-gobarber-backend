@@ -17,7 +17,6 @@ describe('ShowProfile', () => {
       name: 'Teste',
       email: 'teste@email.com',
       password: '123456',
-      avatar: 'avatar.jpg',
     });
 
     const profile = await showProfile.execute({
