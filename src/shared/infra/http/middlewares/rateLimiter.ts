@@ -1,17 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import Redis from 'ioredis';
 import cacheConfig from '@config/cache';
-/* import redis from 'redis'; */
 import { RateLimiterRedis } from 'rate-limiter-flexible';
 import AppError from '@shared/errors/AppError';
 
-/* const redisClient = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: Number(process.env.REDIS_PORT),
-  password: process.env.REDIS_PASS,
-}); */
+let redisClient;
 
-const redisClient = new Redis(cacheConfig.config.redis);
+if (process.env.REDIS_URL) {
+  redisClient = new Redis(process.env.REDIS_URL);
+} else {
+  redisClient = new Redis(cacheConfig.config.redis);
+}
 
 const limiter = new RateLimiterRedis({
   storeClient: redisClient,
