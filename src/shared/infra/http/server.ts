@@ -8,11 +8,13 @@ import { errors } from 'celebrate';
 import routes from '@shared/infra/http/routes';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
+import logging from '@config/logging';
 import rateLimiter from './middlewares/rateLimiter';
 import '@shared/infra/typeorm';
 import '@shared/container';
 
 const app = express();
+const logger = logging.createLogger('server');
 
 app.use(cors());
 app.use(express.json());
@@ -24,14 +26,14 @@ app.use(errors());
 
 app.use(
   (err: Error, request: Request, response: Response, _next: NextFunction) => {
+    logger.error(err);
+
     if (err instanceof AppError) {
       return response.status(err.statusCode).json({
         status: 'error',
         message: err.message,
       });
     }
-
-    console.error(err);
 
     return response.status(500).json({
       status: 'error',
@@ -43,5 +45,5 @@ app.use(
 const port = process.env.PORT || 3333;
 
 app.listen(port, () => {
-  console.log(`Running on ${port} ...`);
+  logger.info(`Running on ${port} ...`);
 });

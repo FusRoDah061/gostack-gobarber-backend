@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 // Sobrescreve uma definição de tipo da biblioteca
 declare namespace Express {
   export interface Request {
