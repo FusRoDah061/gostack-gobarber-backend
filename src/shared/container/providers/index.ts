@@ -1,3 +1,4 @@
+import './LogProvider';
 import './MailTemplateProvider';
 import './MailProvider';
 import './StorageProvider';

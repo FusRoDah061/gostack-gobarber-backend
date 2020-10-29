@@ -9,7 +9,8 @@ const DefaultLogger = SimpleNodeLoggerLogProvider;
 
 export default {
   createLogger: (module: string): ILogProvider => {
-    const logger = new DefaultLogger(module);
+    const logger = new DefaultLogger();
+    logger.setModuleName(module);
     logger.setLevel(process.env.LOG_LEVEL || 'info');
     return logger;
   },

@@ -2,25 +2,27 @@ import { createSimpleLogger } from 'simple-node-logger';
 import ILogProvider from '../models/ILogProvider';
 
 export default class SimpleNodeLoggerLogProvider implements ILogProvider {
-  private logger: any;
+  private logger: any = createSimpleLogger();
 
-  constructor(module: string) {
-    this.logger = createSimpleLogger({ domain: module });
-  }
+  private moduleName: string;
 
   public info(...args: any[]): void {
-    this.logger.info(...args);
+    this.logger.info(`[${this.moduleName}]\t`, ...args);
   }
 
   public debug(...args: any[]): void {
-    this.logger.debug(...args);
+    this.logger.debug(`[${this.moduleName}]\t`, ...args);
   }
 
   public error(...args: any[]): void {
-    this.logger.error(...args);
+    this.logger.error(`[${this.moduleName}]\t`, ...args);
   }
 
-  setLevel(level: string): void {
+  public setLevel(level: string): void {
     this.logger.setLevel(level);
+  }
+
+  public setModuleName(name: string): void {
+    this.moduleName = name;
   }
 }

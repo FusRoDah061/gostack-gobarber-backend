@@ -3,4 +3,5 @@ export default interface ILogProvider {
   debug(...args: any[]): void;
   error(...args: any[]): void;
   setLevel(level: string): void;
+  setModuleName(name: string): void;
 }

@@ -16,8 +16,6 @@ interface IRequestDTO {
 
 @injectable()
 export default class CreateAppointmentService {
-  private logger: ILogProvider;
-
   constructor(
     @inject('AppointmentsRepository')
     private appointmentsRepository: IAppointmentsRepository,
@@ -27,8 +25,11 @@ export default class CreateAppointmentService {
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
+
+    @inject('LogProvider')
+    private logProvider: ILogProvider,
   ) {
-    this.logger = logging.createLogger('CreateAppointmentService');
+    this.logProvider.setModuleName('CreateAppointmentService');
   }
 
   public async execute({
@@ -36,25 +37,25 @@ export default class CreateAppointmentService {
     user_id,
     date,
   }: IRequestDTO): Promise<Appointment> {
-    this.logger.info('Starting appointment creation');
+    this.logProvider.info('Starting appointment creation');
 
     // Obtém o repositório
     const appointmentDate = startOfHour(date);
 
     if (isBefore(appointmentDate, Date.now())) {
-      this.logger.debug(
+      this.logProvider.debug(
         `Can't create appointment on past date [${appointmentDate}] and current date [${Date.now()}]`,
       );
       throw new AppError("You can't create an appointment on a past date.");
     }
 
     if (user_id === provider_id) {
-      this.logger.debug(`Can't create appointment with yourself`);
+      this.logProvider.debug(`Can't create appointment with yourself`);
       throw new AppError("You can't create an appointment with yourself.");
     }
 
     if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 17) {
-      this.logger.debug(
+      this.logProvider.debug(
         `Appointment hour outside allowed period: [${getHours(
           appointmentDate,
         )}]`,
@@ -70,7 +71,7 @@ export default class CreateAppointmentService {
     );
 
     if (appointmentInSameDate) {
-      this.logger.debug(
+      this.logProvider.debug(
         `Appointment already exists for date [${appointmentDate}] and provider [${provider_id}]: `,
         appointmentInSameDate,
       );
@@ -98,7 +99,7 @@ export default class CreateAppointmentService {
       )}`,
     );
 
-    this.logger.info('Finishing appointment creation');
+    this.logProvider.info('Finishing appointment creation');
 
     return appointment;
   }
