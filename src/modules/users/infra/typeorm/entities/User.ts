@@ -40,6 +40,8 @@ export default class User {
     }
 
     switch (uploadConfig.driver) {
+      case 'db':
+        return `data:image/jpeg;charset=utf-8;base64, ${this.avatar}`;
       case 'disk':
         return `${process.env.APP_API_URL}/files/${this.avatar}`;
       case 's3':

@@ -30,10 +30,10 @@ export default class UpdateUserAvatarService {
 
     if (user.avatar && user.avatar !== 'default_avatar.jpg') {
       // Remover avatar antigo
-      await this.storageProvider.deleteFile(user.avatar);
+      await this.storageProvider.delete(user.avatar);
     }
 
-    const filename = await this.storageProvider.saveFile(avatarFilename);
+    const filename = await this.storageProvider.save(avatarFilename);
 
     user.avatar = filename;
 

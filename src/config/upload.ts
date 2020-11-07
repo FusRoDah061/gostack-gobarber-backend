@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import multer, { StorageEngine } from 'multer';
 
 interface IUploadConfig {
-  driver: 's3' | 'disk';
+  driver: 's3' | 'disk' | 'db';
 
   tmpFolder: string;
   uploadsFolder: string;
@@ -14,6 +14,7 @@ interface IUploadConfig {
   };
 
   config: {
+    db: Record<string, unknown>;
     disk: Record<string, unknown>;
     aws: {
       bucket: string;
@@ -51,6 +52,7 @@ export default {
   },
 
   config: {
+    db: {},
     disk: {},
     aws: {
       bucket: 'app-gobarber',
