@@ -3,6 +3,7 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 import UserAvatarController from '@modules/users/infra/http/controllers/UserAvatarController';
+import imageNormalize from '@shared/infra/http/middlewares/imageNormalizer';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import UsersController from '../controllers/UsersController';
 
@@ -27,6 +28,7 @@ usersRouter.patch(
   '/avatar',
   ensureAuthenticated,
   upload.single('avatar'),
+  imageNormalize,
   userAvatarController.update,
 );
 
