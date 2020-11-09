@@ -106,4 +106,4 @@ GoBarber é uma plataforma para agendamento de serviços em barbearias. Desenvol
 
 ## Contribuindo
 
-Após realizar suas alterações no código, abra uma pull-request para a branch master. Assim que for aprovada e mergeada, será gerado um novo deploy na [Netlify](https://www.netlify.com/).
+Após realizar suas alterações no código, abra uma pull-request para a branch master. Assim que for aprovada e mergeada, será gerado um novo deploy no [Heroku](https://www.heroku.com/).
