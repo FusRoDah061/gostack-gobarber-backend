@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "cf21d36c-05e1-4085-96b1-311810df7273",
+		"name": "[Bootcamp GoStack] GoBarber 2020",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "Create appointment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45d63e56-281f-4b19-8402-b7627d0b886d",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"provider_id\": \"91f2b1cd-9cf3-4c54-98a8-b8077bd993c6\",\r\n    \"date\": \"2020-11-30 10:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/appointments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List providers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/providers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"providers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List month Availability",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDIxMDM5NDEsImV4cCI6MTYwMjE5MDM0MSwic3ViIjoiOTFmMmIxY2QtOWNmMy00YzU0LTk4YTgtYjgwNzdiZDk5M2M2In0.M55kKe2Q9VqckhlYXjVGhcEa62G_3jNOFkog-ErjgIY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/providers/ef969f9d-e6d8-4f20-aa5c-8e0283904697/month-availability?month=10&year=2020",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"providers",
+								"ef969f9d-e6d8-4f20-aa5c-8e0283904697",
+								"month-availability"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "10"
+								},
+								{
+									"key": "year",
+									"value": "2020"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List day Availability",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/providers/0698023a-a58b-4060-ad72-252f15423007/day-availability?year=2020&month=10&day=20",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"providers",
+								"0698023a-a58b-4060-ad72-252f15423007",
+								"day-availability"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2020"
+								},
+								{
+									"key": "month",
+									"value": "10"
+								},
+								{
+									"key": "day",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List provider appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/appointments/me?day=10&month=10&year=2020",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments",
+								"me"
+							],
+							"query": [
+								{
+									"key": "day",
+									"value": "10"
+								},
+								{
+									"key": "month",
+									"value": "10"
+								},
+								{
+									"key": "year",
+									"value": "2020"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Password",
+					"item": [
+						{
+							"name": "Forgot Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"allexxrodriguess@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/password/forgot",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"password",
+										"forgot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"123456\",\r\n    \"password_confirmation\": \"123456\",\r\n    \"token\": \"32da3565-8941-477f-b942-0cfc5eb847db\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/password/reset",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"password",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2023495-8d2a-4704-936b-c9e0898ecd90",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Avatar",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/F:/Dados/Downloads/18372991.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/users/avatar",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "605acdbb-abf6-488f-8a7b-e06a1250c15c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Allex R. Amaral\",\r\n    \"email\": \"allexxrodriguess@gmail.com\",\r\n    \"old_password\": \"123123\",\r\n    \"password\": \"123456\",\r\n    \"password_confirmation\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84e48472-960c-4285-a531-33643e7ad289",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f08d4380-6e11-465a-8ef2-de35daf7a8ab",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"allexxrodriguess@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sessions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5018e5b3-c7c5-4bbb-9beb-3d7c4c94e81e",
+				"type": "text/javascript",
+				"exec": [
+					"if(pm.request.auth && pm.request.auth.type === 'noauth') {",
+					"    console.log('Requisição não possui autenticação. Ignorando script');",
+					"}",
+					"else{",
+					"    console.log('Rodando pre-script da collection');",
+					"",
+					"    pm.sendRequest({",
+					"        url: `${pm.environment.get('base_url')}/sessions`,",
+					"        method: 'POST',",
+					"        header: {",
+					"            'content-type': 'application/json'",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: JSON.stringify({ email: pm.environment.get('current_user') || 'allexxrodriguess@gmail.com', password: '123456' })",
+					"        }",
+					"    }, (err, res) => pm.collectionVariables.set(\"token\", res.json().token));",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7ac106ab-ae1d-45fe-a28f-ca5300c888e3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "52b24dbf-7252-4002-9101-5e1e74e7b973",
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDQ3NzkzMzYsImV4cCI6MTYwNDg2NTczNiwic3ViIjoiMjFhY2RiM2QtY2I5My00ZDIwLWI4OWEtMmU2ODdjNzFjZDQ2In0.50GkzTRJ7wi2yq445tO6tFgNfy7peU39dzUlKZo28SE"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
