@@ -6,7 +6,12 @@ export default class RedisCacheProvider implements ICacheProvider {
   private client: RedisClient;
 
   constructor() {
-    this.client = new Redis(cacheConfig.config.redis);
+    if (cacheConfig.config.redis.path) {
+      this.client = new Redis(cacheConfig.config.redis.path);
+    }
+    else {
+      this.client = new Redis(cacheConfig.config.redis);
+    }
   }
 
   public async save(key: string, value: any): Promise<void> {
