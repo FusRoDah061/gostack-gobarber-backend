@@ -2,7 +2,7 @@
   "name": "gobarber-backend",
   "version": "1.0.0",
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files && yarn typeorm migration:run",

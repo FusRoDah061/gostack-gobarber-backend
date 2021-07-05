@@ -21,7 +21,9 @@ if (process.env.DATABASE_URL) {
   postgresConnection = {
     ...postgresConnection,
     url: process.env.DATABASE_URL,
-    ssl: true,
+    extra: {
+      ssl: true
+    }
   };
 } else {
   postgresConnection = {
