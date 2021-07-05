@@ -6,11 +6,7 @@ import AppError from '@shared/errors/AppError';
 
 let redisClient;
 
-if (process.env.REDIS_URL) {
-  redisClient = new Redis(process.env.REDIS_URL);
-} else {
-  redisClient = new Redis(cacheConfig.config.redis);
-}
+redisClient = new Redis(cacheConfig.config.redis);
 
 const limiter = new RateLimiterRedis({
   storeClient: redisClient,
